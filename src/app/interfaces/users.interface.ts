@@ -13,3 +13,7 @@ export interface IUserList {
     total_pages: number,
     data: Array<IUser>
 }
+
+export interface IUserListState {
+    usersList: IUserList
+}

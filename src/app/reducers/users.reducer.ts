@@ -1,17 +1,20 @@
 import { Action, createReducer, on } from '@ngrx/store';
+import { getUserList, loadUserList } from '../actions/users.actions';
+import { IUserListState, IUser, IUserList } from '../interfaces/users.interface';
 
 
 export const usersFeatureKey = 'users';
 
-export interface State {
-
-}
-
-export const initialState: State = {
-
+export const initialState: IUserListState = {
+  usersList: <IUserList>{}
 };
 
-export const reducer = createReducer(
+export const loadUserListReducer = createReducer(
   initialState,
-
+  on(
+    loadUserList,
+    (state: IUserListState, { payload }) => {
+      return {...state, usersList: payload }
+    }
+  )
 );

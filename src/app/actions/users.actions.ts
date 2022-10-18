@@ -1,9 +1,14 @@
 import { createAction, props } from '@ngrx/store';
-import { IUser } from '../interfaces/users.interface';
+import { IUser, IUserList } from '../interfaces/users.interface';
 
 export const getUserList = createAction(
-  '[User] Get Users List',
+  '[User] Get User List',
   props<{ page: number }>()
+);
+
+export const loadUserList = createAction(
+  '[User] Load User List',
+  props<{ payload: IUserList }>()
 );
 
 export const createUser = createAction(
