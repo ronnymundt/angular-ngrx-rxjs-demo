@@ -16,6 +16,8 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this._store.dispatch(getUserList({page: 1}));
+
+    //this._store.dispatch(loadUserList({payload: <IUserList>{}}));
   }
 
 }

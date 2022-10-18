@@ -10,6 +10,7 @@ import { environment } from '../environments/environment';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreFeaturesModule } from './module/store-features.module';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { StoreEffectsModule } from './module/store-effects.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { UserListComponent } from './components/user-list/user-list.component';
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     HttpClientModule,
-    StoreFeaturesModule
+    StoreFeaturesModule,
+    StoreEffectsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
