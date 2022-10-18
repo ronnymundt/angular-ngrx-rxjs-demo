@@ -30,10 +30,7 @@ export class ReqresApiService {
    * @param user 
    * @returns 
    */
-  public createUserByUser$(user: IUser): Observable<IUser> {
-
-    console.log("HDFJF");
-    
-    return this._httpClient.post<IUser>(this._usersUrl, { user });
+  public createUserByUser$(user: IUser): Observable<IUser> { 
+    return this._httpClient.post<IUser>(this._usersUrl, { ...user });
   }
 }

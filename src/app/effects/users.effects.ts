@@ -33,10 +33,14 @@ export class UsersEffects {
   /**
    * 
    */
-  public createUser$: Observable<Action> = createEffect(() => {
+  public createUser$: Observable<any> = createEffect(() => {
     return this._actions$.pipe(
       ofType(createUser),
-      tap((action) => this._reqresinService.createUserByUser$(action.payload))
+      mergeMap((action) => {
+        return this._reqresinService.createUserByUser$(action.payload).pipe(
+          map(user => { console.log(user) })
+        )
+      })
     )
   }, { dispatch: false });
 }
