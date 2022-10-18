@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { createUser, loadUserList } from '../actions/users.actions';
+import { addUserList, createUser, loadUserList } from '../actions/users.actions';
 import { IUserListState, IUser, IUserList } from '../interfaces/users.interface';
 
 export const usersFeatureKey = 'users';
@@ -17,15 +17,14 @@ export const loadUserListReducer = createReducer(
     }
   ),
   on(
-    createUser,
+    addUserList,
     (state: IUserListState, { payload }) => {
-      let cloneState = <IUserListState>JSON.parse(JSON.stringify(state));
 
-      cloneState.usersList.data.push(payload);
-
-      console.log(payload);
+      console.log("REDUCER", payload);
       
 
+      let cloneState = <IUserListState>JSON.parse(JSON.stringify(state));
+      cloneState.usersList.data.push(payload); 
       return { ...cloneState }
     }
   )

@@ -11,6 +11,11 @@ export const loadUserList = createAction(
   props<{ payload: IUserList }>()
 );
 
+export const addUserList = createAction(
+  '[User] Add User List',
+  props<{ payload: IUser }>()
+);
+
 export const createUser = createAction(
   '[User] Create User',
   props<{ payload: IUser }>()

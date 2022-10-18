@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { map, mergeMap, Observable, of, switchMap, tap } from 'rxjs';
-import { createUser, getUserList, loadUserList } from '../actions/users.actions';
+import { addUserList, createUser, getUserList, loadUserList } from '../actions/users.actions';
 import { IUser, IUserList } from '../interfaces/users.interface';
 import { ReqresApiService } from '../services/reqresApi.service';
 
@@ -15,7 +15,7 @@ export class UsersEffects {
   ) {}
 
   /**
-   * 
+   * Effect wird bei Action getUserList asugefüht und läd User Liste von API und führt anschliessend  Action loadUserList aus.
    */ 
   public getUserList$: Observable<Action> = createEffect(() => {
     return this._actions$.pipe(
@@ -31,7 +31,7 @@ export class UsersEffects {
   });
 
   /**
-   * 
+   * Effect wird bei Action createUser asugefüht und läd User Liste von API und führt anschliessend  Action addUserList aus.
    */
   public createUser$: Observable<Action> = createEffect(() => {
     return this._actions$.pipe(
@@ -39,11 +39,10 @@ export class UsersEffects {
       mergeMap((action) => {
         return this._reqresinService.createUserByUser$(action.payload).pipe(
           map((user: IUser) => {  
-            return createUser({ payload: user });
+            return addUserList({ payload: user });
           })
         )
       })
     )
-  }, { dispatch: false });
-  
+  });  
 }

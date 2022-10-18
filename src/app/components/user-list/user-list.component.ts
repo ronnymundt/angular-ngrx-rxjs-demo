@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { createUser, getUserList, loadUserList } from '../../actions/users.actions';
+import { addUserList, createUser, getUserList, loadUserList } from '../../actions/users.actions';
 import { IUser, IUserList, IUserListState } from '../../interfaces/users.interface';
 import { ReqresApiService } from '../../services/reqresApi.service';
 
@@ -22,6 +22,9 @@ export class UserListComponent implements OnInit {
     //this._store.dispatch(loadUserList({payload: <IUserList>{}}));
   }
 
+  /**
+   * 
+   */
   public onButtonClick(): void {
     const user: IUser = {
       avatar: "",
