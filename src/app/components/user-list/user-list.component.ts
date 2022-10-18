@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { addUserList, createUser, getUserList, loadUserList } from '../../actions/users.actions';
+import { createUser, getUserList, loadUserList } from '../../actions/users.actions';
 import { IUser, IUserList, IUserListState } from '../../interfaces/users.interface';
 import { ReqresApiService } from '../../services/reqresApi.service';
 
@@ -27,15 +27,13 @@ export class UserListComponent implements OnInit {
    */
   public onButtonClick(): void {
     const user: IUser = {
-      avatar: "",
+      avatar: "https://reqres.in/img/faces/10-image.jpg",
       email: "test@test.com",
       first_name: "Luke",
       last_name: "Skywalker"
     }
 
     this._store.dispatch(createUser({ payload: user }));
-
-    //this._reqresApiService.createUserByUser$(user).subscribe(x => console.log(x))
   }
 
 }
