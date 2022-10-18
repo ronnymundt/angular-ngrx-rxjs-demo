@@ -19,7 +19,7 @@ export const loadUserListReducer = createReducer(
   on(
     addUserToList,
     (state: IUserListState, { payload }) => {
-      let cloneState = <IUserListState>JSON.parse(JSON.stringify(state));
+      let cloneState = <IUserListState>JSON.parse(JSON.stringify(state)); // füge daten zu State hinzu, da Demo REST API Daten nicht schreibt
       cloneState.usersList.data.push(payload); 
       return { ...cloneState }
     }
