@@ -43,5 +43,4 @@ export class UserListComponent implements OnInit {
   public onDeleteClick(): void {
     this._store.dispatch(deleteUser({id: 1}));
   }
-
 }
