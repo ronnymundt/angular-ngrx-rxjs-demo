@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { addUserToList, createUser, loadUserList } from '../actions/users.actions';
+import { addUserToList, createUser, loadUserList, updateUserToList } from '../actions/users.actions';
 import { IUserListState, IUser, IUserList } from '../interfaces/users.interface';
 
 export const usersFeatureKey = 'users';
@@ -13,15 +13,29 @@ export const loadUserListReducer = createReducer(
   on(
     loadUserList,
     (state: IUserListState, { payload }) => {
-      return {...state, usersList: payload }
+      return {...state, usersList: payload };
     }
   ),
   on(
     addUserToList,
     (state: IUserListState, { payload }) => {
-      let cloneState = <IUserListState>JSON.parse(JSON.stringify(state)); // füge daten zu State hinzu, da Demo REST API Daten nicht schreibt
-      cloneState.usersList.data.push(payload); 
-      return { ...cloneState }
+      let cloneState = <IUserListState>JSON.parse(JSON.stringify(state)); 
+      cloneState.usersList.data.push(payload); // füge daten zu State hinzu, da Demo REST API Daten nicht schreibt
+      return { ...cloneState };
+    }
+  ),
+  on(
+    updateUserToList,
+    (state: IUserListState, { userId, userData }) => {
+      let cloneState = <IUserListState>JSON.parse(JSON.stringify(state));
+      for(let user of cloneState.usersList.data) {
+        if(user.id !== userId) { continue; }
+
+        user = Object.assign(user, userData); // update daten im State, da Demo REST API Daten nicht schreibt
+        break;
+      }        
+
+      return { ...cloneState };
     }
   )
 );

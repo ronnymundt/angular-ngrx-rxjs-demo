@@ -33,4 +33,25 @@ export class ReqresApiService {
   public createUserByUser$(user: IUser): Observable<IUser> { 
     return this._httpClient.post<IUser>(this._usersUrl, { ...user });
   }
+
+  /**
+   * Oberservable aktualisiert einen User viaREST API.
+   * @param id 
+   * @param user 
+   * @returns 
+   */
+  public updateUserByIdAndUser$(id: number, user: IUser): Observable<IUser> {
+    const url = `${this._usersUrl}/${id}`;
+    return  this._httpClient.put<IUser>(url, { ...user });
+  }
+
+  /**
+   * Oberservable löscht den User per ID.
+   * @param id 
+   * @returns 
+   */
+  public deleteUserById(id: number): Observable<null> {
+    const url = `${this._usersUrl}/${id}`;
+    return this._httpClient.delete<null>(url);
+  }
 }

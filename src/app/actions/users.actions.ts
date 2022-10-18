@@ -26,9 +26,15 @@ export const addUserToList = createAction(
 //
 export const updateUser = createAction(
   '[User] Update User',
-  props<{ payload: IUser }>()
+  props<{ userId: number, userData: IUser }>()
 );
 
+export const updateUserToList = createAction(
+  '[User] Update User To List',
+  props<{ userId: number, userData: IUser }>()
+);
+
+//
 export const deleteUser = createAction(
   '[User] Delete User',
   props<{ id: number }>()

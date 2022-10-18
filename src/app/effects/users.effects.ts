@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { map, mergeMap, Observable, of, switchMap, tap } from 'rxjs';
-import { addUserToList, createUser, getUserList, loadUserList } from '../actions/users.actions';
+import { addUserToList, createUser, getUserList, loadUserList, updateUser, updateUserToList } from '../actions/users.actions';
 import { IUser, IUserList } from '../interfaces/users.interface';
 import { ReqresApiService } from '../services/reqresApi.service';
 
@@ -25,13 +25,13 @@ export class UsersEffects {
           map((userList: IUserList) => {
             return loadUserList({ payload: userList });
           })
-        )
+        );
       })
-    )
+    );
   });
 
   /**
-   * Effect wird bei Action createUser asugefüht und läd User Liste von API und führt anschliessend  Action addUserList aus.
+   * Effect wird bei Action createUser asugefüht und läd User Liste von API und führt anschliessend Action addUserList aus.
    */
   public createUser$: Observable<Action> = createEffect(() => {
     return this._actions$.pipe(
@@ -41,8 +41,24 @@ export class UsersEffects {
           map((user: IUser) => {  
             return addUserToList({ payload: user });
           })
-        )
+        );
       })
-    )
-  });  
+    );
+  });
+  
+  /**
+   * Effect update User via REST API Service und führt anschliessend Action updateUserToList aus.
+   */
+  public updateUser$: Observable<Action> = createEffect(() => {
+    return this._actions$.pipe(
+      ofType(updateUser),
+      mergeMap((action) => {
+        return this._reqresinService.updateUserByIdAndUser$(action.userId, action.userData).pipe(
+          map((user: IUser) => {
+            return updateUserToList({ userId: action.userId, userData: user });
+          })
+        );
+      })
+    );
+  });
 }

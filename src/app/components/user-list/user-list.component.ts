@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { createUser, getUserList, loadUserList } from '../../actions/users.actions';
+import { createUser, getUserList, loadUserList, updateUser } from '../../actions/users.actions';
 import { IUser, IUserList, IUserListState } from '../../interfaces/users.interface';
 import { ReqresApiService } from '../../services/reqresApi.service';
 
@@ -18,22 +18,25 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this._store.dispatch(getUserList({page: 1}));
-
-    //this._store.dispatch(loadUserList({payload: <IUserList>{}}));
   }
 
-  /**
-   * 
-   */
-  public onButtonClick(): void {
-    const user: IUser = {
-      avatar: "https://reqres.in/img/faces/10-image.jpg",
-      email: "test@test.com",
-      first_name: "Luke",
-      last_name: "Skywalker"
-    }
+  private _user: IUser = {
+    avatar: "https://reqres.in/img/faces/10-image.jpg",
+    email: "test@test.com",
+    first_name: "Luke",
+    last_name: "Skywalker"
+  }
 
-    this._store.dispatch(createUser({ payload: user }));
+  //
+  public onButtonClick(): void {
+    
+
+    this._store.dispatch(createUser({ payload: this._user }));
+  }
+
+  //
+  public onUpdateClick(): void {
+    this._store.dispatch(updateUser({userId: 1, userData: this._user }));
   }
 
 }
