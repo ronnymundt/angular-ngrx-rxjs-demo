@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { map, mergeMap, Observable, of, switchMap, tap } from 'rxjs';
 import { createUser, getUserList, loadUserList } from '../actions/users.actions';
-import { IUserList } from '../interfaces/users.interface';
+import { IUser, IUserList } from '../interfaces/users.interface';
 import { ReqresApiService } from '../services/reqresApi.service';
 
 @Injectable()
@@ -33,14 +33,15 @@ export class UsersEffects {
   /**
    * 
    */
-  public createUser$: Observable<any> = createEffect(() => {
+  public createUser$: Observable<Action> = createEffect(() => {
     return this._actions$.pipe(
       ofType(createUser),
       mergeMap((action) => {
         return this._reqresinService.createUserByUser$(action.payload).pipe(
-          map(user => { console.log(user) })
-        )
+          () => this.getUserList$
+        );
       })
-    )
-  }, { dispatch: false });
+    );
+  });
+  
 }
