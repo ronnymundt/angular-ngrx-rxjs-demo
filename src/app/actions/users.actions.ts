@@ -19,7 +19,7 @@ export const createUser = createAction(
 );
 
 export const addUserToList = createAction(
-  '[User] Add User List',
+  '[User] Add User To List',
   props<{ payload: IUser }>()
 );
 
