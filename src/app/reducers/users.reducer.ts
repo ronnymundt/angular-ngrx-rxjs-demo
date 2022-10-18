@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { getUserList, loadUserList } from '../actions/users.actions';
+import { createUser, loadUserList } from '../actions/users.actions';
 import { IUserListState, IUser, IUserList } from '../interfaces/users.interface';
 
 export const usersFeatureKey = 'users';

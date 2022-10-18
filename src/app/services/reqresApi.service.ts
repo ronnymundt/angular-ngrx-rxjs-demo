@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IUserList } from '../interfaces/users.interface';
+import { IUser, IUserList } from '../interfaces/users.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ReqresApiService {
 
-  private readonly usersUrl = "https://reqres.in/api/users";
+  private readonly _usersUrl = "https://reqres.in/api/users";
 
   constructor(
     private _httpClient: HttpClient
@@ -21,7 +21,19 @@ export class ReqresApiService {
    * @returns 
    */
   public getUserListByPage$(page: number): Observable<IUserList> {
-    const url = `${this.usersUrl}?page=${page}`;
+    const url = `${this._usersUrl}?page=${page}`;
     return this._httpClient.get<IUserList>(url);
+  }
+
+  /**
+   * Observable erzeugt ein neuen User via REST API.
+   * @param user 
+   * @returns 
+   */
+  public createUserByUser$(user: IUser): Observable<IUser> {
+
+    console.log("HDFJF");
+    
+    return this._httpClient.post<IUser>(this._usersUrl, { user });
   }
 }
