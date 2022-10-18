@@ -8,7 +8,7 @@ import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { StoreFeaturesModule } from './module/store-features.module';
+import { StoreReducersModule } from './module/store-reducers.module';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { StoreEffectsModule } from './module/store-effects.module';
 
@@ -23,7 +23,7 @@ import { StoreEffectsModule } from './module/store-effects.module';
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     HttpClientModule,
-    StoreFeaturesModule,
+    StoreReducersModule,
     StoreEffectsModule
   ],
   providers: [],

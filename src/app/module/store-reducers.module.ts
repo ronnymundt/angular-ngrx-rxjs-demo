@@ -12,4 +12,4 @@ import { loadUserListReducer, usersFeatureKey } from '../reducers/users.reducer'
     StoreModule.forFeature(usersFeatureKey, loadUserListReducer),
   ]
 })
-export class StoreFeaturesModule { }
+export class StoreReducersModule { }
