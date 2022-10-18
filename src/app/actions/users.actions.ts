@@ -39,3 +39,8 @@ export const deleteUser = createAction(
   '[User] Delete User',
   props<{ id: number }>()
 );
+
+export const deleteUserToList = createAction(
+  '[User] Delete User To List',
+  props<{ id: number }>()
+);

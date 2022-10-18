@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { createUser, getUserList, loadUserList, updateUser } from '../../actions/users.actions';
+import { createUser, deleteUser, getUserList, loadUserList, updateUser } from '../../actions/users.actions';
 import { IUser, IUserList, IUserListState } from '../../interfaces/users.interface';
 import { ReqresApiService } from '../../services/reqresApi.service';
 
@@ -37,6 +37,11 @@ export class UserListComponent implements OnInit {
   //
   public onUpdateClick(): void {
     this._store.dispatch(updateUser({userId: 1, userData: this._user }));
+  }
+
+  //
+  public onDeleteClick(): void {
+    this._store.dispatch(deleteUser({id: 1}));
   }
 
 }

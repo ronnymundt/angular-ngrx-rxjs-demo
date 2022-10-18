@@ -50,7 +50,7 @@ export class ReqresApiService {
    * @param id 
    * @returns 
    */
-  public deleteUserById(id: number): Observable<null> {
+  public deleteUserById$(id: number): Observable<null> {
     const url = `${this._usersUrl}/${id}`;
     return this._httpClient.delete<null>(url);
   }

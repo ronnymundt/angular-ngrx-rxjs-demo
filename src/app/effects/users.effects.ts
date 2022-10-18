@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { map, mergeMap, Observable, of, switchMap, tap } from 'rxjs';
-import { addUserToList, createUser, getUserList, loadUserList, updateUser, updateUserToList } from '../actions/users.actions';
+import { addUserToList, createUser, deleteUser, deleteUserToList, getUserList, loadUserList, updateUser, updateUserToList } from '../actions/users.actions';
 import { IUser, IUserList } from '../interfaces/users.interface';
 import { ReqresApiService } from '../services/reqresApi.service';
 
@@ -61,4 +61,19 @@ export class UsersEffects {
       })
     );
   });
+
+  public deleteUser$: Observable<Action> = createEffect(() => {
+    return this._actions$.pipe(
+      ofType(deleteUser),
+      mergeMap((action) => {
+        return this._reqresinService.deleteUserById$(action.id).pipe(
+          map((res) => {
+            console.log(res);
+            
+            return deleteUserToList({id: action.id});
+          })
+        );
+      })
+    );
+  })
 }
