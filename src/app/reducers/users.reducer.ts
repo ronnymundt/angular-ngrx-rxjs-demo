@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { addUserToList, createUser, loadUserList, updateUserToList } from '../actions/users.actions';
+import { addUserToList, createUser, deleteUserToList, loadUserList, updateUserToList } from '../actions/users.actions';
 import { IUserListState, IUser, IUserList } from '../interfaces/users.interface';
 
 export const usersFeatureKey = 'users';
@@ -36,6 +36,15 @@ export const loadUserListReducer = createReducer(
       }        
 
       return { ...cloneState };
+    }
+  ),
+  on(
+    deleteUserToList,
+    (state: IUserListState, { id }) => {
+
+      // TODO: user per id aus state filtern/löschen
+
+      return { ...state };
     }
   )
 );
