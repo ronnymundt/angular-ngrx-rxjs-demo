@@ -15,5 +15,18 @@ export const loadUserListReducer = createReducer(
     (state: IUserListState, { payload }) => {
       return {...state, usersList: payload }
     }
+  ),
+  on(
+    createUser,
+    (state: IUserListState, { payload }) => {
+      let cloneState = <IUserListState>JSON.parse(JSON.stringify(state));
+
+      cloneState.usersList.data.push(payload);
+
+      console.log(payload);
+      
+
+      return { ...cloneState }
+    }
   )
 );

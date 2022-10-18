@@ -16,7 +16,7 @@ export class UsersEffects {
 
   /**
    * 
-   */
+   */ 
   public getUserList$: Observable<Action> = createEffect(() => {
     return this._actions$.pipe(
       ofType(getUserList),
@@ -25,9 +25,9 @@ export class UsersEffects {
           map((userList: IUserList) => {
             return loadUserList({ payload: userList });
           })
-        );
+        )
       })
-    );
+    )
   });
 
   /**
@@ -38,10 +38,12 @@ export class UsersEffects {
       ofType(createUser),
       mergeMap((action) => {
         return this._reqresinService.createUserByUser$(action.payload).pipe(
-          () => this.getUserList$
-        );
+          map((user: IUser) => {  
+            return createUser({ payload: user });
+          })
+        )
       })
-    );
-  });
+    )
+  }, { dispatch: false });
   
 }
