@@ -6,9 +6,9 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ReqresinService {
+export class ReqresApiService {
 
-  private readonly reqUrl = "https://reqres.in/api/users";
+  private readonly usersUrl = "https://reqres.in/api/users";
 
   constructor(
     private _httpClient: HttpClient
@@ -21,7 +21,7 @@ export class ReqresinService {
    * @returns 
    */
   public getUserListByPage$(page: number): Observable<IUserList> {
-    const url = `${this.reqUrl}?page=${page}`;
+    const url = `${this.usersUrl}?page=${page}`;
     return this._httpClient.get<IUserList>(url);
   }
 }

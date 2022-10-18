@@ -4,14 +4,14 @@ import { Action } from '@ngrx/store';
 import { map, mergeMap, Observable } from 'rxjs';
 import { getUserList, loadUserList } from '../actions/users.actions';
 import { IUserList } from '../interfaces/users.interface';
-import { ReqresinService } from '../services/reqresin.service';
+import { ReqresApiService } from '../services/reqresApi.service';
 
 @Injectable()
 export class UsersEffects {
 
   constructor(
     private _actions$: Actions,
-    private _reqresinService: ReqresinService
+    private _reqresinService: ReqresApiService
   ) {}
 
   public getUserList$: Observable<Action> = createEffect(() => {
