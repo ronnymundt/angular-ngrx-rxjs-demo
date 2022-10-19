@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { createUser, deleteUser, getUserList, loadUserList, updateUser } from '../../actions/users.actions';
-import { IUser, IUserList, IUserListState } from '../../interfaces/users.interface';
+import { IUser, IUserListState } from '../../interfaces/users.interface';
 import { selectUser } from '../../selectors/users.selectors';
-import { ReqresApiService } from '../../services/reqresApi.service';
 
 @Component({
   selector: 'user-list',
