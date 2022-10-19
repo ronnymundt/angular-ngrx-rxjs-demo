@@ -1,3 +1,14 @@
 img {
     width: 5rem;
 }
+
+.pager {
+    display: grid;
+    grid-template-columns: auto 1fr min-content min-content;
+    justify-content: right;
+}
+
+.support {
+    padding: 1rem;
+    text-align: center;
+}

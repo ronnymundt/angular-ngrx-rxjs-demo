@@ -11,10 +11,16 @@ export interface IUserList {
     per_page: number,
     total: number,
     total_pages: number,
-    data: Array<IUser>
+    data: Array<IUser>,
+    support: IUserListSupport
 }
 
 export interface IUserListState {
     usersList: IUserList,
     isLoading: boolean
+}
+
+export interface IUserListSupport {
+    url: string,
+    text: string
 }

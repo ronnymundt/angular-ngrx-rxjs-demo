@@ -52,18 +52,17 @@ export const loadUserListReducer = createReducer(
 
         user = Object.assign(user, userData); // update daten im State, da Demo REST API Daten nicht schreibt
         break;
-      }        
-
+      }
       return { ...cloneState, isLoading: false };
     }
   ),
   on(
     deleteUserToList,
-    (state: IUserListState, { id }) => {
-
-      // TODO: user per id aus state filtern/löschen
-
-      return { ...state, isLoading: false };
+    (state: IUserListState, { id }) => {   
+      const filterData = state.usersList.data.filter(x => x.id !== id);
+      let cloneState = <IUserListState>JSON.parse(JSON.stringify(state));
+      cloneState.usersList.data = [...filterData]; // lösche daten im State, da Demo REST API Daten nicht schreibt
+      return { ...cloneState, isLoading: false };
     }
   )
 );
