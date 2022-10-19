@@ -5,14 +5,15 @@ import { IUserListState, IUser, IUserList } from '../interfaces/users.interface'
 export const usersFeatureKey = 'users';
 
 export const initialState: IUserListState = {
-  usersList: <IUserList>{}
+  usersList: <IUserList>{},
+  isLoading: false
 };
 
 export const loadUserListReducer = createReducer(
-  initialState,
+  initialState, 
   on(
     loadUserList,
-    (state: IUserListState, { payload }) => {
+    (state: IUserListState, { payload }) => {      
       return {...state, usersList: payload };
     }
   ),
@@ -35,7 +36,7 @@ export const loadUserListReducer = createReducer(
         break;
       }        
 
-      return { ...cloneState };
+      return { ...cloneState,  };
     }
   ),
   on(

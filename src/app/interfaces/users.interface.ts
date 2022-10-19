@@ -15,5 +15,6 @@ export interface IUserList {
 }
 
 export interface IUserListState {
-    usersList: IUserList
+    usersList: IUserList,
+    isLoading: boolean
 }

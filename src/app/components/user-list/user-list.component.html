@@ -5,3 +5,18 @@
 <button (click)="onUpdateClick()">Update User</button>
 
 <button (click)="onDeleteClick()">Delete User</button>
+
+{{isLoading | async}}
+
+<table>
+    <tr *ngFor="let user of tableData | async">
+        <td>{{user.id}}</td>
+        <td>
+            <img src="{{user.avatar}}" alt="">
+        </td>
+       
+        <td>{{user.first_name}}</td>
+        <td>{{user.last_name}}</td>
+        <td>{{user.email}}</td>       
+    </tr>
+</table>
