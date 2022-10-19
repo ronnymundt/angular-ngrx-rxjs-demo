@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { createUser, deleteUser, getUserList, loadUserList, updateUser } from '../../actions/users.actions';
 import { IUser, IUserList, IUserListState } from '../../interfaces/users.interface';
+import { selectUser } from '../../selectors/users.selectors';
 import { ReqresApiService } from '../../services/reqresApi.service';
 
 @Component({
@@ -12,12 +13,13 @@ import { ReqresApiService } from '../../services/reqresApi.service';
 export class UserListComponent implements OnInit {
 
   constructor(
-    private _store: Store<IUserListState>,
-    private _reqresApiService: ReqresApiService
+    private _store: Store<IUserListState>
   ) { }
 
   ngOnInit(): void {
     this._store.dispatch(getUserList({page: 1}));
+
+    this._store.select(selectUser).subscribe(x => console.log(x));
   }
 
   private _user: IUser = {
@@ -29,9 +31,7 @@ export class UserListComponent implements OnInit {
 
   //
   public onButtonClick(): void {
-    
-
-    this._store.dispatch(createUser({ payload: this._user }));
+        this._store.dispatch(createUser({ payload: this._user }));
   }
 
   //

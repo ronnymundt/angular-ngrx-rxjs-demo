@@ -62,6 +62,9 @@ export class UsersEffects {
     );
   });
 
+  /**
+   * Effect löscht einen User via REST API und führt anschliessend Action deleteUserToList aus.
+   */
   public deleteUser$: Observable<Action> = createEffect(() => {
     return this._actions$.pipe(
       ofType(deleteUser),
