@@ -67,9 +67,7 @@ export class UsersEffects {
       ofType(deleteUser),
       mergeMap((action) => {
         return this._reqresinService.deleteUserById$(action.id).pipe(
-          map((res) => {
-            console.log(res);
-            
+          map((res) => {  
             return deleteUserToList({id: action.id});
           })
         );
