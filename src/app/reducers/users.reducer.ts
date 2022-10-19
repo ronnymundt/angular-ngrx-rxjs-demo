@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { addUserToList, createUser, deleteUserToList, loadUserList, updateUserToList } from '../actions/users.actions';
+import { addUserToList, createUser, deleteUserToList, getUserList, loadUserList, updateUser, updateUserToList } from '../actions/users.actions';
 import { IUserListState, IUser, IUserList } from '../interfaces/users.interface';
 
 export const usersFeatureKey = 'users';
@@ -12,9 +12,21 @@ export const initialState: IUserListState = {
 export const loadUserListReducer = createReducer(
   initialState, 
   on(
+    getUserList,
+    (state: IUserListState, {page: number}) => {
+      return { ...state, isLoading: true }
+    }
+  ),
+  on(
     loadUserList,
     (state: IUserListState, { payload }) => {      
-      return {...state, usersList: payload };
+      return { ...state, usersList: payload, isLoading: false };
+    }
+  ),
+  on(
+    createUser,
+    (state: IUserListState) => {
+      return {...state, isLoading: true }
     }
   ),
   on(
@@ -22,7 +34,13 @@ export const loadUserListReducer = createReducer(
     (state: IUserListState, { payload }) => {
       let cloneState = <IUserListState>JSON.parse(JSON.stringify(state)); 
       cloneState.usersList.data.push(payload); // füge daten zu State hinzu, da Demo REST API Daten nicht schreibt
-      return { ...cloneState };
+      return { ...cloneState, isLoading: false };
+    }
+  ),
+  on(
+    updateUser,
+    (state: IUserListState) => {
+      return { ...state, isLoading: true }
     }
   ),
   on(
@@ -36,7 +54,7 @@ export const loadUserListReducer = createReducer(
         break;
       }        
 
-      return { ...cloneState,  };
+      return { ...cloneState, isLoading: false };
     }
   ),
   on(
@@ -45,7 +63,7 @@ export const loadUserListReducer = createReducer(
 
       // TODO: user per id aus state filtern/löschen
 
-      return { ...state };
+      return { ...state, isLoading: false };
     }
   )
 );

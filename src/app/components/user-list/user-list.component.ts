@@ -28,23 +28,25 @@ export class UserListComponent implements OnInit {
 
   private _user: IUser = {
     avatar: "https://reqres.in/img/faces/10-image.jpg",
-    email: "test@test.com",
+    email: "luke.skywalker@jedi.com",
     first_name: "Luke",
     last_name: "Skywalker"
   }
 
   //
-  public onButtonClick(): void {
+  public onCreateClick(): void {
         this._store.dispatch(createUser({ payload: this._user }));
   }
 
   //
-  public onUpdateClick(): void {
-    this._store.dispatch(updateUser({userId: 1, userData: this._user }));
+  public onUpdateClick(id?: number): void {
+    const userid = id ? id : 0;
+    this._store.dispatch(updateUser({userId: userid, userData: this._user }));
   }
 
   //
-  public onDeleteClick(): void {
-    this._store.dispatch(deleteUser({id: 1}));
+  public onDeleteClick(id?: number): void {
+    const userid = id ? id : 0;
+    this._store.dispatch(deleteUser({id: userid}));
   }
 }

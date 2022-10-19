@@ -1,22 +1,30 @@
-<p>user-list works!</p>
-
-<button (click)="onButtonClick()">Create User</button>
-
-<button (click)="onUpdateClick()">Update User</button>
-
-<button (click)="onDeleteClick()">Delete User</button>
-
-{{isLoading | async}}
+<button (click)="onCreateClick()" [disabled]="isLoading | async">Create User</button>
 
 <table>
-    <tr *ngFor="let user of tableData | async">
-        <td>{{user.id}}</td>
-        <td>
-            <img src="{{user.avatar}}" alt="">
-        </td>
-       
-        <td>{{user.first_name}}</td>
-        <td>{{user.last_name}}</td>
-        <td>{{user.email}}</td>       
-    </tr>
+    <thead>
+        <th>ID</th>
+        <th>Avatar</th>
+        <th>Vorname</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th></th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of tableData | async">
+            <td>{{user.id}}</td>
+            <td>
+                <img src="{{user.avatar}}" alt="">
+            </td>       
+            <td>{{user.first_name}}</td>
+            <td>{{user.last_name}}</td>
+            <td>{{user.email}}</td>
+            <td>
+                <button (click)="onUpdateClick(user?.id)" [disabled]="isLoading | async">Update</button>
+            </td>
+            <td>
+                <button (click)="onDeleteClick(user?.id)" [disabled]="isLoading | async">Delete User</button>
+            </td>
+        </tr>
+    </tbody>    
 </table>
