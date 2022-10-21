@@ -1,4 +1,4 @@
-import { ErrorHandler, Injectable } from '@angular/core';
+import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { setGlobalErrors } from '../actions/global-error.actions';
 import { IGlobalErrorState } from '../interfaces/global-error.interface';
@@ -9,15 +9,18 @@ import { IGlobalErrorState } from '../interfaces/global-error.interface';
 export class GlobalErrorHandlerService implements ErrorHandler {
 
     constructor(
-        
+        private _injector: Injector
     ) { }
 
     handleError(error: Error): void {
         const globalError: IGlobalErrorState = {
             error: error,
             isError: true
-        }        
+        } 
         
+        const store = this._injector.get(Store<IGlobalErrorState>);
+        
+        store.dispatch(setGlobalErrors({ payload: globalError }));
         //this._store.dispatch(setGlobalErrors({ payload: globalError }));
     }
 }
