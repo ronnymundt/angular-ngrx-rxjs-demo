@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
-import { loadUserListReducer, usersFeatureKey } from '../reducers/users.reducer';
+import { userListReducer, usersFeatureKey } from '../reducers/users.reducer';
+import { globalErrorFeatureKey, globalErrorReducer } from '../reducers/global-error.reducer';
 
 
 
@@ -9,7 +10,8 @@ import { loadUserListReducer, usersFeatureKey } from '../reducers/users.reducer'
   declarations: [],
   imports: [
     CommonModule,
-    StoreModule.forFeature(usersFeatureKey, loadUserListReducer),
+    StoreModule.forFeature(usersFeatureKey, userListReducer),
+    StoreModule.forFeature(globalErrorFeatureKey, globalErrorReducer)
   ]
 })
 export class StoreReducersModule { }

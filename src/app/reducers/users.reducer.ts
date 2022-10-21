@@ -13,7 +13,7 @@ export const initialState: IUserListState = {
   error: null
 };
 
-export const loadUserListReducer = createReducer(
+export const userListReducer = createReducer(
   initialState, 
   on(
     getUserList,
