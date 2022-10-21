@@ -3,5 +3,5 @@ import { IGlobalErrorState } from '../interfaces/global-error.interface';
 
 export const setGlobalErrors = createAction(
   '[GlobalError] Set Global Errors',
-  props<{ payload: IGlobalErrorState }>()
+  props<{ payload: Error }>()
 );

@@ -13,14 +13,7 @@ export class GlobalErrorHandlerService implements ErrorHandler {
     ) { }
 
     handleError(error: Error): void {
-        const globalError: IGlobalErrorState = {
-            error: error,
-            isError: true
-        } 
-        
-        const store = this._injector.get(Store<IGlobalErrorState>);
-        
-        store.dispatch(setGlobalErrors({ payload: globalError }));
-        //this._store.dispatch(setGlobalErrors({ payload: globalError }));
+        const store = this._injector.get(Store<IGlobalErrorState>);        
+        store.dispatch(setGlobalErrors({ payload: error })); 
     }
 }

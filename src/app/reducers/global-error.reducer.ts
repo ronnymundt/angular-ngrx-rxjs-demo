@@ -13,8 +13,8 @@ export const globalErrorReducer = createReducer(
   initialState,
   on(
     setGlobalErrors,
-    (state: IGlobalErrorState) => { 
-      return { ...state }; 
+    (state: IGlobalErrorState, { payload }) => { 
+      return { ...state, error: payload, isError: true }; 
     }
   )
 );
