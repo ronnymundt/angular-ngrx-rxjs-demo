@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
-import { map, mergeMap, Observable, of, switchMap, tap } from 'rxjs';
-import { addUserToList, createUser, deleteUser, deleteUserToList, getUserList, loadUserList, updateUser, updateUserToList } from '../actions/users.actions';
+import { catchError, map, mergeMap, Observable, of, switchMap, tap } from 'rxjs';
+import { 
+  addUserToList, createUser, deleteUser, 
+  deleteUserToList, getUserList, 
+  loadUserList, setUserError, updateUser, updateUserToList } from '../actions/users.actions';
 import { IUser, IUserList } from '../interfaces/users.interface';
-import { ReqresApiService } from '../services/reqresApi.service';
+import { ReqresApiService } from '../services/reqres-api.service';
+import { EErrors } from '../enums/errors.enum';
 
 @Injectable()
 export class UsersEffects {
@@ -19,16 +23,18 @@ export class UsersEffects {
    */ 
   public getUserList$: Observable<Action> = createEffect(() => {
     return this._actions$.pipe(
-      ofType(getUserList),
-      mergeMap((action) => {
-        return this._reqresinService.getUserListByPage$(action.page).pipe(
-          map((userList: IUserList) => {
-            return loadUserList({ payload: userList });
-          })
-        );
-      })
-    );
-  });
+        ofType(getUserList),
+        mergeMap((action) => {
+            return this._reqresinService.getUserListByPage$(action.page).pipe(
+            map((userList: IUserList) => {
+                return loadUserList({ payload: userList });
+            }));
+        }),
+        catchError(err => {
+          return of(setUserError({ error: EErrors.requestUserList }));
+        })
+      );
+    });
 
   /**
    * Effect wird bei Action createUser asugefüht und läd User Liste von API und führt anschliessend Action addUserList aus.
@@ -42,6 +48,9 @@ export class UsersEffects {
             return addUserToList({ payload: user });
           })
         );
+      }),  
+      catchError(err => {
+        return of(setUserError({ error: EErrors.createUser }));
       })
     );
   });
@@ -58,6 +67,9 @@ export class UsersEffects {
             return updateUserToList({ userId: action.userId, userData: user });
           })
         );
+      }),  
+      catchError(err => {
+        return of(setUserError({ error: EErrors.updateUser }));
       })
     );
   });
@@ -74,6 +86,9 @@ export class UsersEffects {
             return deleteUserToList({id: action.id});
           })
         );
+      }),
+      catchError(err => {
+        return of(setUserError({ error: EErrors.deleteUser }));
       })
     );
   })

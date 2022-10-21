@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { RoutingModule } from './module/routing.module';
@@ -11,6 +11,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreReducersModule } from './module/store-reducers.module';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { StoreEffectsModule } from './module/store-effects.module';
+import { GlobalErrorHandlerService } from './services/global-error-handler.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,9 @@ import { StoreEffectsModule } from './module/store-effects.module';
     StoreReducersModule,
     StoreEffectsModule
   ],
-  providers: [],
+  providers: [
+    { provide: ErrorHandler, useClass: GlobalErrorHandlerService },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

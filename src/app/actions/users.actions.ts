@@ -44,3 +44,8 @@ export const deleteUserToList = createAction(
   '[User] Delete User To List',
   props<{ id: number }>()
 );
+
+export const setUserError = createAction(
+  '[User] Get User List Error',
+  props<{ error: string }>()
+);

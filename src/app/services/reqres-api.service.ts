@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IUser, IUserList } from '../interfaces/users.interface';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,7 @@ export class ReqresApiService {
    * @param user 
    * @returns 
    */
-  public createUserByUser$(user: IUser): Observable<IUser> { 
+  public createUserByUser$(user: IUser): Observable<IUser> {
     return this._httpClient.post<IUser>(this._usersUrl, { ...user });
   }
 

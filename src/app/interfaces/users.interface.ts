@@ -1,3 +1,9 @@
+export interface IUserListState {
+    usersList: IUserList,
+    isLoading: boolean,
+    error: string | null
+}
+
 export interface IUser {
     id?: number,
     email: string,
@@ -13,11 +19,6 @@ export interface IUserList {
     total_pages: number,
     data: Array<IUser>,
     support: IUserListSupport
-}
-
-export interface IUserListState {
-    usersList: IUserList,
-    isLoading: boolean
 }
 
 export interface IUserListSupport {
