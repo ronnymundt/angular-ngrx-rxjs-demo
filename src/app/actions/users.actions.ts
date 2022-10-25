@@ -46,6 +46,6 @@ export const deleteUserToList = createAction(
 );
 
 export const setUserError = createAction(
-  '[User] Get User List Error',
+  '[User] Set User Error',
   props<{ error: string }>()
 );
