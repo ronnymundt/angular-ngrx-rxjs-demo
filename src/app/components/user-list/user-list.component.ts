@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
-import { createUser, deleteUser, getUserList, loadUserList, updateUser } from '../../actions/users.actions';
-import { IUser, IUserList, IUserListState, IUserListSupport } from '../../interfaces/users.interface';
-import { selectUsers, selectUserState } from '../../selectors/users.selectors';
+import { UserActions } from '../../actions/users.actions';
+import { IUser, IUserListState } from '../../interfaces/users.interface';
+import { selectUsers } from '../../selectors/users.selectors';
 
 @Component({
   selector: 'user-list',
@@ -28,7 +28,7 @@ export class UserListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._store.dispatch(getUserList({page: this._page}));
+    this._store.dispatch(UserActions.getUserList({page: this._page}));
   }
 
   private _user: IUser = {
@@ -40,19 +40,19 @@ export class UserListComponent implements OnInit {
 
   //
   public onCreateClick(): void {
-        this._store.dispatch(createUser({ payload: this._user }));
+        this._store.dispatch(UserActions.createUser({ payload: this._user }));
   }
 
   //
   public onUpdateClick(id?: number): void {
     const userid = id ? id : 0;
-    this._store.dispatch(updateUser({userId: userid, userData: this._user }));
+    this._store.dispatch(UserActions.updateUser({userId: userid, userData: this._user }));
   }
 
   //
   public onDeleteClick(id?: number): void {
     const userid = id ? id : 0;
-    this._store.dispatch(deleteUser({id: userid}));
+    this._store.dispatch(UserActions.deleteUser({id: userid}));
   }
 
   //
@@ -63,6 +63,6 @@ export class UserListComponent implements OnInit {
       this._page++;
     }
 
-    this._store.dispatch(getUserList({page: this._page}));
+    this._store.dispatch(UserActions.getUserList({page: this._page}));
   }
 }

@@ -1,9 +1,6 @@
-import { Action, createReducer, on } from '@ngrx/store';
-import { 
-  addUserToList, createUser, deleteUserToList, 
-  getUserList, loadUserList, setUserError, updateUser, 
-  updateUserToList } from '../actions/users.actions';
-import { IUserListState, IUser, IUserList } from '../interfaces/users.interface';
+import { createReducer, on } from '@ngrx/store';
+import { UserActions} from '../actions/users.actions';
+import { IUserListState, IUserList } from '../interfaces/users.interface';
 
 export const usersFeatureKey = 'users';
 
@@ -16,31 +13,31 @@ export const initialState: IUserListState = {
 export const userListReducer = createReducer(
   initialState, 
   on(
-    getUserList,
+    UserActions.getUserList,
     (state: IUserListState, { page: number }) => {
       return { ...state, error: null, isLoading: true }
     }
   ),
   on(
-    setUserError,
+    UserActions.setUserError,
     (state: IUserListState, { error }) => {
       return { ...state, error: error, isLoading: false }
     }
   ),
   on(
-    loadUserList,
+    UserActions.loadUserList,
     (state: IUserListState, { payload }) => { 
       return { ...state, usersList: payload, isLoading: false, error: null };
     }
   ),
   on(
-    createUser,
+    UserActions.createUser,
     (state: IUserListState) => {
       return {...state, isLoading: true, error: null }
     }
   ),
   on(
-    addUserToList,
+    UserActions.addUserToList,
     (state: IUserListState, { payload }) => {
       let cloneState = <IUserListState>JSON.parse(JSON.stringify(state)); 
       cloneState.usersList.data.push(payload); // füge daten zu State hinzu, da Demo REST API Daten nicht schreibt
@@ -48,13 +45,13 @@ export const userListReducer = createReducer(
     }
   ),
   on(
-    updateUser,
+    UserActions.updateUser,
     (state: IUserListState) => {
       return { ...state, isLoading: true, error: null }
     }
   ),
   on(
-    updateUserToList,
+    UserActions.updateUserToList,
     (state: IUserListState, { userId, userData }) => {
       let cloneState = <IUserListState>JSON.parse(JSON.stringify(state));
       for(let user of cloneState.usersList.data) {
@@ -67,7 +64,7 @@ export const userListReducer = createReducer(
     }
   ),
   on(
-    deleteUserToList,
+    UserActions.deleteUserToList,
     (state: IUserListState, { id }) => {   
       const filterData = state.usersList.data.filter(x => x.id !== id);
       let cloneState = <IUserListState>JSON.parse(JSON.stringify(state));
