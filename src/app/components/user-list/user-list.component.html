@@ -1,3 +1,6 @@
+<h1>NgRx & RxJS Demo</h1>
+<hr>
+
 <table>
     <thead>
         <th>ID</th>
@@ -11,25 +14,20 @@
     <tbody>
         <tr *ngFor="let user of tableData$ | async">
             <td>{{user.id}}</td>
-            <td>
-                <img src="{{user.avatar}}" alt="{{user.first_name}} {{user.last_name}}">
-            </td>       
+            <td> <img src="{{user.avatar}}" alt="{{user.first_name}} {{user.last_name}}"> </td>       
             <td>{{user.first_name}}</td>
             <td>{{user.last_name}}</td>
             <td>{{user.email}}</td>
-            <td>
-                <button (click)="onUpdateClick(user?.id)" [disabled]="isLoading$ | async">Update</button>
-            </td>
-            <td>
-                <button (click)="onDeleteClick(user?.id)" [disabled]="isLoading$ | async">Delete User</button>
-            </td>
+            <td class="td-buttons"><span (click)="onUpdateClick(user?.id)" class="material-icons"> loop </span></td>
+            <td class="td-buttons"><span (click)="onDeleteClick(user?.id)" class="material-icons"> delete_forever </span></td>
+        </tr>
+        <tr>    
+            <td colspan="7"><span (click)="onCreateClick()" class="material-icons add"> add </span></td>
         </tr>
     </tbody>    
 </table>
 
 <div class="pager">
-    <button (click)="onCreateClick()" [disabled]="isLoading$ | async">Create User</button> 
-    <span></span>
-    <button (click)="onClickPaging('back')" [disabled]="(page$ | async) === 1"><<</button>
-    <button (click)="onClickPaging('next')" [disabled]="(page$ | async) === 2">>></button>
+    <span *ngIf="(page$ | async) !== 1" (click)="onClickPaging('back')" class="material-icons"> arrow_back </span>
+    <span *ngIf="(page$ | async) !== 2" (click)="onClickPaging('next')" class="material-icons"> arrow_forward </span>
 </div>

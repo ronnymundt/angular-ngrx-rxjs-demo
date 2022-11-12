@@ -1,3 +1,19 @@
+// HTML defaults
+html, body { height: 100%; }
+
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.bit-app-background {
+    background-color:#303030;
+    color:#fff;
+    padding: 1rem;
+}
+
 table {  
     border-collapse: 0;
     border-spacing: 0;
@@ -5,7 +21,13 @@ table {
 
     th, td {
         border-bottom: solid 1px grey;   
-        text-align: left;     
+        text-align: left;   
+        padding: 0.5rem;  
+    }
+
+    th {
+        font-weight: normal;
+        font-style: italic;       
     }
 }
 
