@@ -20,18 +20,19 @@ export class UsersEffects {
    */ 
   public getUserList$: Observable<Action> = createEffect(() => {
     return this._actions$.pipe(
-        ofType(UserActions.getUserList),
-        mergeMap((action) => {
-            return this._reqresinService.getUserListByPage$(action.page).pipe(
-            map((userList: IUserList) => {
-                return UserActions.loadUserList({ payload: userList });
-            }));
-        }),
-        catchError(err => {      
-          return of(UserActions.setUserError({ error: EErrors.requestUserList }));
-        })
-      );
-    });
+      ofType(UserActions.getUserList),
+      mergeMap((action) => {
+        return this._reqresinService.getUserListByPage$(action.page).pipe(
+          map((userList: IUserList) => {
+              return UserActions.loadUserList({ payload: userList });
+          }),
+          catchError(() => {      
+            return of(UserActions.setUserError({ error: EErrors.requestUserList }));
+          })
+        );
+      })
+    );
+  });
 
   /**
    * Effect wird bei Action createUser asugefüht und läd User Liste von API und führt anschliessend Action addUserList aus.
@@ -43,11 +44,11 @@ export class UsersEffects {
         return this._reqresinService.createUserByUser$(action.payload).pipe(
           map((user: IUser) => {  
             return UserActions.addUserToList({ payload: user });
+          }),  
+          catchError(err => {
+            return of(UserActions.setUserError({ error: EErrors.createUser }));
           })
         );
-      }),  
-      catchError(err => {
-        return of(UserActions.setUserError({ error: EErrors.createUser }));
       })
     );
   });
@@ -62,11 +63,11 @@ export class UsersEffects {
         return this._reqresinService.updateUserByIdAndUser$(action.userId, action.userData).pipe(
           map((user: IUser) => {
             return UserActions.updateUserToList({ userId: action.userId, userData: user });
+          }),
+          catchError(() => {
+            return of(UserActions.setUserError({ error: EErrors.updateUser }));
           })
         );
-      }),  
-      catchError(err => {
-        return of(UserActions.setUserError({ error: EErrors.updateUser }));
       })
     );
   });
@@ -79,13 +80,13 @@ export class UsersEffects {
       ofType(UserActions.deleteUser),
       mergeMap((action) => {
         return this._reqresinService.deleteUserById$(action.id).pipe(
-          map((res) => {  
+          map(() => {  
             return UserActions.deleteUserToList({id: action.id});
+          }),
+          catchError(() => {
+            return of(UserActions.setUserError({ error: EErrors.deleteUser }));
           })
         );
-      }),
-      catchError(err => {
-        return of(UserActions.setUserError({ error: EErrors.deleteUser }));
       })
     );
   })
