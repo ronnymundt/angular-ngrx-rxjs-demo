@@ -11,7 +11,7 @@
         }
       },
       "root": "",
-      "sourceRoot": "src",      
+      "sourceRoot": "src",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ngrx-rxjs-demo:build:production"
+              "buildTarget": "ngrx-rxjs-demo:build:production"
             },
             "development": {
-              "browserTarget": "ngrx-rxjs-demo:build:development"
+              "buildTarget": "ngrx-rxjs-demo:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngrx-rxjs-demo:build"
+            "buildTarget": "ngrx-rxjs-demo:build"
           }
         },
         "test": {
