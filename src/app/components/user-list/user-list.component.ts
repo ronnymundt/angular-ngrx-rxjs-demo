@@ -4,7 +4,7 @@ import {Store} from "@ngrx/store";
 import {
   IUserListState,
   selectUserListAll,
-  selectUserListPagerCount,
+  selectUserListPagerCount, selectUserListTotalCount,
   UserListActions
 } from "../../+state/user-list";
 
@@ -23,6 +23,7 @@ import {
 export class UserListComponent implements OnInit {
   userList$ = this.userListStore.select(selectUserListAll);
   pagerCount$ = this.userListStore.select(selectUserListPagerCount);
+  userListTotalCount$ = this.userListStore.select(selectUserListTotalCount);
 
   constructor(
     private readonly userListStore: Store<IUserListState>

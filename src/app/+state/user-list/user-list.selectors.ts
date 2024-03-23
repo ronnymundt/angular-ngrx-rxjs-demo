@@ -20,3 +20,8 @@ export const selectUserListPagerCount = createSelector(
   selectUserListState,
   (state) => ({ current: state.page, total: state.total_pages })
 );
+
+export const selectUserListTotalCount = createSelector(
+  selectTotal,
+  (total) => total
+);

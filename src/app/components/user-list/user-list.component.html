@@ -8,16 +8,23 @@
     <a (click)="onDeleteClick(user?.id)" class="material-icons"> delete_forever </a>
   </section>
   <section class="action">
-    <a (click)="addRadomUserClick()" class="material-icons">add</a>
+    <a (click)="addRadomUserClick()"
+       class="material-icons"
+       title="Add random User">add</a>
   </section>
 </div>
 <hr>
 <div class="pager" *ngIf="(pagerCount$ | async) as pc" >
   <a (click)="onPagingClick()"
      class="material-icons"
-     [ngClass]="{'disabled': pc.current === 2 }">
+     [ngClass]="{'disabled': pc.current === 2 }"
+     title="Load page 2 of 2">
     arrow_downward
   </a>
-  <span>Page</span>
-  <span>{{ pc.current }}/{{ pc.total }}</span>
+  <div>
+    <span>Page</span>
+    <span>{{ pc.current }} of {{ pc.total }}</span>
+    <span>Total entries</span>
+    <span>{{ userListTotalCount$ | async }}</span>
+  </div>
 </div>

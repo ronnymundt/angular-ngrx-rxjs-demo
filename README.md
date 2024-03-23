@@ -1,4 +1,4 @@
-# Angular Ngrx Rxjs Demo
+# Angular Ngrx (+Entity) and Rxjs Demo
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.
 
