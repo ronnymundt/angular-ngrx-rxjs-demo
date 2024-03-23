@@ -4,11 +4,18 @@ import { map, Observable } from 'rxjs';
 import { UserActions } from '../../actions/users.actions';
 import { IUser, IUserListState } from '../../interfaces/users.interface';
 import { selectUsers } from '../../selectors/users.selectors';
+import { NgFor, NgIf, AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'user-list',
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss']
+    selector: 'user-list',
+    templateUrl: './user-list.component.html',
+    styleUrls: ['./user-list.component.scss'],
+    standalone: true,
+    imports: [
+      NgFor,
+      NgIf,
+      AsyncPipe
+    ]
 })
 export class UserListComponent implements OnInit {
   // PUBLIC
@@ -21,10 +28,10 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private _store: Store<IUserListState>
-  ) { 
+  ) {
     this.tableData$ = this._store.select(selectUsers).pipe(map(x => { return x.usersList.data; }));
     this.isLoading$ = this._store.select(selectUsers).pipe(map(x => { return x.isLoading; }));
-    this.page$ = this._store.select(selectUsers).pipe(map(x => { return x.usersList.page; })); 
+    this.page$ = this._store.select(selectUsers).pipe(map(x => { return x.usersList.page; }));
   }
 
   ngOnInit(): void {
