@@ -25,3 +25,8 @@ export const selectUserListTotalCount = createSelector(
   selectTotal,
   (total) => total
 );
+
+export const selectUserListUserById = (id: number) => createSelector(
+  selectEntities,
+  (entities) => entities[id]
+);

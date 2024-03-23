@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {RouterOutlet} from "@angular/router";
 import { UserListComponent } from './components/user-list/user-list.component';
 
 @Component({
@@ -6,8 +7,6 @@ import { UserListComponent } from './components/user-list/user-list.component';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
     standalone: true,
-    imports: [UserListComponent]
+  imports: [UserListComponent, RouterOutlet]
 })
-export class AppComponent {
-  title = 'ngrx-rxjs-demo';
-}
+export class AppComponent { }

@@ -5,12 +5,13 @@
     <span>{{user.first_name}}</span>
     <span>{{user.last_name}}</span>
     <span>{{user.email}}</span>
+    <a (click)="onDetailClick(user?.id)" class="material-icons"> manage_accounts </a>
     <a (click)="onDeleteClick(user?.id)" class="material-icons"> delete_forever </a>
   </section>
   <section class="action">
     <a (click)="addRadomUserClick()"
        class="material-icons"
-       title="Add random User">add</a>
+       title="Add random User">person_add</a>
   </section>
 </div>
 <hr>

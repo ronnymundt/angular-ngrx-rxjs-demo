@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgFor, NgIf, AsyncPipe, NgClass} from '@angular/common';
+import {Router} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {
   IUserListState,
@@ -26,7 +27,8 @@ export class UserListComponent implements OnInit {
   userListTotalCount$ = this.userListStore.select(selectUserListTotalCount);
 
   constructor(
-    private readonly userListStore: Store<IUserListState>
+    private readonly userListStore: Store<IUserListState>,
+    private readonly router: Router
   ) { }
 
   ngOnInit(): void {
@@ -44,5 +46,9 @@ export class UserListComponent implements OnInit {
 
   addRadomUserClick() {
     this.userListStore.dispatch(UserListActions.addRandomUser());
+  }
+
+  async onDetailClick(id: number | undefined) {
+    await this.router.navigate([`user/${id}`]);
   }
 }

@@ -14,7 +14,6 @@ export class ReqResApiService {
     private readonly httpClient: HttpClient
   ) { }
 
-
   getUserListByPage(page: number): Observable<IUserListResponse> {
     const url = `${this._usersUrl}?page=${page}`;
     return this.httpClient.get<IUserListResponse>(url);
@@ -23,6 +22,5 @@ export class ReqResApiService {
   getUserById(id: number): Observable<{data: IUser}> {
     const url = `${this._usersUrl}/${id}`;
     return this.httpClient.get<{data: IUser}>(url);
-
   }
 }
