@@ -1,33 +1,22 @@
 <h1>NgRx & RxJS Demo</h1>
 <hr>
 
-<table>
-    <thead>
-        <th>ID</th>
-        <th>Avatar</th>
-        <th>Vorname</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th></th>
-        <th></th>
-    </thead>
-    <tbody>
-        <tr *ngFor="let user of tableData$ | async">
-            <td>{{user.id}}</td>
-            <td> <img src="{{user.avatar}}" alt="{{user.first_name}} {{user.last_name}}"> </td>       
-            <td>{{user.first_name}}</td>
-            <td>{{user.last_name}}</td>
-            <td>{{user.email}}</td>
-            <td class="td-buttons"><span (click)="onUpdateClick(user?.id)" class="material-icons"> loop </span></td>
-            <td class="td-buttons"><span (click)="onDeleteClick(user?.id)" class="material-icons"> delete_forever </span></td>
-        </tr>
-        <tr>    
-            <td colspan="7"><span (click)="onCreateClick()" class="material-icons add"> add </span></td>
-        </tr>
-    </tbody>    
-</table>
+<div class="user-list">
+  <section *ngFor="let user of userList$ | async">
+    <span>{{user.id}}</span>
+    <img [ngSrc]="user.avatar" width="64" height="64" alt="avatar">
+    <span>{{user.first_name}}</span>
+    <span>{{user.last_name}}</span>
+    <span>{{user.email}}</span>
+    <span (click)="onUpdateClick(user?.id)" class="material-icons"> loop </span>
+    <span (click)="onDeleteClick(user?.id)" class="material-icons"> delete_forever </span>
+  </section>
+</div>
 
+<!--<tr>
+    <td colspan="7"><span (click)="onCreateClick()" class="material-icons add"> add </span></td>
+</tr>-->
 <div class="pager">
-    <span *ngIf="(page$ | async) !== 1" (click)="onClickPaging('back')" class="material-icons"> arrow_back </span>
-    <span *ngIf="(page$ | async) !== 2" (click)="onClickPaging('next')" class="material-icons"> arrow_forward </span>
+    <!--<span *ngIf="(page$ | async) !== 1" (click)="onClickPaging('back')" class="material-icons"> arrow_back </span>
+    <span *ngIf="(page$ | async) !== 2" (click)="onClickPaging('next')" class="material-icons"> arrow_forward </span>-->
 </div>

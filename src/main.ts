@@ -1,26 +1,25 @@
-import {ErrorHandler, importProvidersFrom, isDevMode} from '@angular/core';
+import {isDevMode} from '@angular/core';
+import {provideEffects} from "@ngrx/effects";
+import {UserListEffects, userListReducer} from "./app/+state/user-list";
 import { AppComponent } from './app/app.component';
-import { StoreEffectsModule } from './app/module/store-effects.module';
-import { StoreReducersModule } from './app/module/store-reducers.module';
 import { withInterceptorsFromDi, provideHttpClient } from '@angular/common/http';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { reducers, metaReducers } from './app/reducers';
-import { StoreModule } from '@ngrx/store';
-import { RoutingModule } from './app/module/routing.module';
-import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
-import { GlobalErrorHandlerService } from './app/services/global-error-handler.service';
+import {provideStoreDevtools} from '@ngrx/store-devtools';
+import {provideStore} from '@ngrx/store';
+import {bootstrapApplication } from '@angular/platform-browser';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(
-      BrowserModule,
-      RoutingModule,
-      StoreModule.forRoot(reducers, { metaReducers }),
-      isDevMode() ? StoreDevtoolsModule.instrument() : [],
-      StoreReducersModule,
-      StoreEffectsModule
-    ),
-    { provide: ErrorHandler, useClass: GlobalErrorHandlerService },
-    provideHttpClient(withInterceptorsFromDi())
+    provideHttpClient(withInterceptorsFromDi()),
+    provideStore({
+      userListState: userListReducer,
+    }),
+    provideEffects([
+      UserListEffects
+    ]),
+    isDevMode() ? provideStoreDevtools({
+      autoPause: true,
+      trace: false,
+      traceLimit: 75,
+    }) : [],
   ]
 }).catch(err => console.error(err));
