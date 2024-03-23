@@ -30,6 +30,14 @@ export const userListReducer = createReducer(
       ...state, page, per_page, total, total_pages,
     }),
   ),
+  on(
+    UserListActions.removeOne,
+    (state, { id }) => userListAdapter.removeOne(id, state),
+  ),
+  on(
+    UserListActions.addOne,
+    (state, { user }) => userListAdapter.addOne(user, state),
+  )
 
 );
 

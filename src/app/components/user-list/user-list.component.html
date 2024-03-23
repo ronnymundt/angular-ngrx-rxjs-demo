@@ -1,22 +1,23 @@
-<h1>NgRx & RxJS Demo</h1>
 <hr>
-
 <div class="user-list">
   <section *ngFor="let user of userList$ | async">
-    <span>{{user.id}}</span>
-    <img [ngSrc]="user.avatar" width="64" height="64" alt="avatar">
+    <img [src]="user.avatar" width="64" height="64" alt="avatar">
     <span>{{user.first_name}}</span>
     <span>{{user.last_name}}</span>
     <span>{{user.email}}</span>
-    <span (click)="onUpdateClick(user?.id)" class="material-icons"> loop </span>
-    <span (click)="onDeleteClick(user?.id)" class="material-icons"> delete_forever </span>
+    <a (click)="onDeleteClick(user?.id)" class="material-icons"> delete_forever </a>
+  </section>
+  <section class="action">
+    <a (click)="addRadomUserClick()" class="material-icons">add</a>
   </section>
 </div>
-
-<!--<tr>
-    <td colspan="7"><span (click)="onCreateClick()" class="material-icons add"> add </span></td>
-</tr>-->
-<div class="pager">
-    <!--<span *ngIf="(page$ | async) !== 1" (click)="onClickPaging('back')" class="material-icons"> arrow_back </span>
-    <span *ngIf="(page$ | async) !== 2" (click)="onClickPaging('next')" class="material-icons"> arrow_forward </span>-->
+<hr>
+<div class="pager" *ngIf="(pagerCount$ | async) as pc" >
+  <a (click)="onPagingClick()"
+     class="material-icons"
+     [ngClass]="{'disabled': pc.current === 2 }">
+    arrow_downward
+  </a>
+  <span>Page</span>
+  <span>{{ pc.current }}/{{ pc.total }}</span>
 </div>

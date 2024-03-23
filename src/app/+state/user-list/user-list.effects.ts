@@ -14,7 +14,7 @@ export class UserListEffects {
     private readonly userListState: Store<IUserListState>
   ) {}
 
-  GetUserListByPage = createEffect(() => {
+  getUserListByPage = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserListActions.getUserListByPage),
       switchMap(({ page }) => this.reqResApiService.getUserListByPage(page).pipe(
@@ -29,5 +29,18 @@ export class UserListEffects {
         map(response => UserListActions.addMany({ users: response.data })),
       ))
     );
-  })
+  });
+
+  addRandomUser = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserListActions.addRandomUser),
+      switchMap(() => this.reqResApiService.getUserById(Math.floor(Math.random() * 12) + 1).pipe(
+        map(user => UserListActions.addOne({user: {
+          ...user.data,
+          id: Math.floor(Math.random() * (9999 - 13)) + 13, // Random ID
+
+        }})),
+      ))
+    );
+  });
 }

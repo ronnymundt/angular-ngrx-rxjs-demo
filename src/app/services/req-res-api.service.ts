@@ -20,17 +20,9 @@ export class ReqResApiService {
     return this.httpClient.get<IUserListResponse>(url);
   }
 
-  createUserByUser(user: IUser): Observable<IUser> {
-    return this.httpClient.post<IUser>(this._usersUrl, { user });
-  }
-
-  updateUserByIdAndUser(id: number, user: IUser): Observable<IUser> {
+  getUserById(id: number): Observable<{data: IUser}> {
     const url = `${this._usersUrl}/${id}`;
-    return  this.httpClient.put<IUser>(url, { user });
-  }
+    return this.httpClient.get<{data: IUser}>(url);
 
-  deleteUserById(id: number): Observable<null> {
-    const url = `${this._usersUrl}/${id}`;
-    return this.httpClient.delete<null>(url);
   }
 }

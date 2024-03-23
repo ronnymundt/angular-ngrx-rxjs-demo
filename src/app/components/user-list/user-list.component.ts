@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {NgFor, NgIf, AsyncPipe, NgOptimizedImage} from '@angular/common';
+import {NgFor, NgIf, AsyncPipe, NgClass} from '@angular/common';
 import {Store} from "@ngrx/store";
-import {IUserListState, selectUserListAll, UserListActions} from "../../+state/user-list";
+import {
+  IUserListState,
+  selectUserListAll,
+  selectUserListPagerCount,
+  UserListActions
+} from "../../+state/user-list";
 
 @Component({
     selector: 'user-list',
@@ -12,11 +17,12 @@ import {IUserListState, selectUserListAll, UserListActions} from "../../+state/u
     NgFor,
     NgIf,
     AsyncPipe,
-    NgOptimizedImage
+    NgClass
   ]
 })
 export class UserListComponent implements OnInit {
   userList$ = this.userListStore.select(selectUserListAll);
+  pagerCount$ = this.userListStore.select(selectUserListPagerCount);
 
   constructor(
     private readonly userListStore: Store<IUserListState>
@@ -26,21 +32,16 @@ export class UserListComponent implements OnInit {
     this.userListStore.dispatch(UserListActions.getUserListByPage({ page: 1 }));
   }
 
-  onCreateClick(): void {
-
-  }
-
-  onUpdateClick(id?: number): void {
-    const userid = id ? id : 0;
-
-  }
-
   onDeleteClick(id?: number): void {
-    const userid = id ? id : 0;
-
+    if(!id) {return;}
+    this.userListStore.dispatch(UserListActions.removeOne({ id }));
   }
 
-  onClickPaging(): void {
+  onPagingClick(): void {
+    this.userListStore.dispatch(UserListActions.getUserListByPage({ page: 2 }));
+  }
 
+  addRadomUserClick() {
+    this.userListStore.dispatch(UserListActions.addRandomUser());
   }
 }
