@@ -1,15 +1,15 @@
-import {IUser} from "../+state/user-list";
+import { IUser } from '../+state/user-list';
 
 export interface IUserListResponse {
-  page: number,
-  per_page: number,
-  total: number,
-  total_pages: number,
-  data: Array<IUser>,
-  support: IUserSupport
+  page: number;
+  per_page: number;
+  total: number;
+  total_pages: number;
+  data: Array<IUser>;
+  support: IUserSupport;
 }
 
 export interface IUserSupport {
-  url: string,
-  text: string
+  url: string;
+  text: string;
 }

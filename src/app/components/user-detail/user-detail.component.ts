@@ -1,15 +1,19 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {Store} from "@ngrx/store";
-import {switchMap, take} from "rxjs";
-import {IUser, IUserListState, selectUserListUserById} from "../../+state/user-list";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { switchMap, take } from 'rxjs';
+import {
+  IUser,
+  IUserListState,
+  selectUserListUserById,
+} from '../../+state/user-list';
 
 @Component({
   selector: 'user-detail',
   standalone: true,
   imports: [],
   templateUrl: './user-detail.component.html',
-  styleUrl: './user-detail.component.scss'
+  styleUrl: './user-detail.component.scss',
 })
 export class UserDetailComponent implements OnInit {
   user: IUser | null = null;
@@ -17,8 +21,8 @@ export class UserDetailComponent implements OnInit {
 
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly userListSate: Store<IUserListState>
-  ) { }
+    private readonly userListSate: Store<IUserListState>,
+  ) {}
 
   ngOnInit(): void {
     this.initSubs();
@@ -28,9 +32,13 @@ export class UserDetailComponent implements OnInit {
     this.route.paramMap
       .pipe(
         take(1),
-        switchMap(params =>
-          this.userListSate.select(selectUserListUserById(+(params.get('id') as string))))
-      ).subscribe(user => {
+        switchMap((params) =>
+          this.userListSate.select(
+            selectUserListUserById(+(params.get('id') as string)),
+          ),
+        ),
+      )
+      .subscribe((user) => {
         this.user = user ?? null;
       });
   }

@@ -1,24 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import {NgIf, AsyncPipe, NgClass} from '@angular/common';
-import {Router} from "@angular/router";
-import {Store} from "@ngrx/store";
+import { NgIf, AsyncPipe, NgClass } from '@angular/common';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import {
   IUserListState,
   selectUserListAll,
-  selectUserListPagerCount, selectUserListTotalCount,
-  UserListActions
-} from "../../+state/user-list";
+  selectUserListPagerCount,
+  selectUserListTotalCount,
+  UserListActions,
+} from '../../+state/user-list';
 
 @Component({
-    selector: 'user-list',
-    templateUrl: './user-list.component.html',
-    styleUrls: ['./user-list.component.scss'],
-    standalone: true,
-  imports: [
-    NgIf,
-    AsyncPipe,
-    NgClass
-  ]
+  selector: 'user-list',
+  templateUrl: './user-list.component.html',
+  styleUrls: ['./user-list.component.scss'],
+  standalone: true,
+  imports: [NgIf, AsyncPipe, NgClass],
 })
 export class UserListComponent implements OnInit {
   userList$ = this.userListStore.select(selectUserListAll);
@@ -27,15 +24,17 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private readonly userListStore: Store<IUserListState>,
-    private readonly router: Router
-  ) { }
+    private readonly router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.userListStore.dispatch(UserListActions.getUserListByPage({ page: 1 }));
   }
 
   onDeleteClick(id?: number): void {
-    if(!id) {return;}
+    if (!id) {
+      return;
+    }
     this.userListStore.dispatch(UserListActions.removeOne({ id }));
   }
 

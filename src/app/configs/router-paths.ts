@@ -1,5 +1,5 @@
-import {Routes} from "@angular/router";
-import {UserListComponent} from "../components/user-list/user-list.component";
+import { Routes } from '@angular/router';
+import { UserListComponent } from '../components/user-list/user-list.component';
 
 export const RouterPaths: Routes = [
   {
@@ -8,9 +8,12 @@ export const RouterPaths: Routes = [
   },
   {
     path: 'user/:id',
-    loadComponent: () => import('../components/user-detail/user-detail.component').then(m => m.UserDetailComponent)
+    loadComponent: () =>
+      import('../components/user-detail/user-detail.component').then(
+        (m) => m.UserDetailComponent,
+      ),
   },
 
   // otherwise redirect to login
-  { path: '**', redirectTo: 'users', pathMatch: 'full' }
-]
+  { path: '**', redirectTo: 'users', pathMatch: 'full' },
+];

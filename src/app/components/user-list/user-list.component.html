@@ -1,27 +1,36 @@
-<hr>
+<hr />
 <div class="user-list">
-  @for(user of userList$ | async; track user.id) {
+  @for (user of userList$ | async; track user.id) {
     <section>
-      <img [src]="user.avatar" width="64" height="64" alt="avatar">
-      <span>{{user.first_name}}</span>
-      <span>{{user.last_name}}</span>
-      <span>{{user.email}}</span>
-      <a (click)="onDetailClick(user?.id)" class="material-icons"> manage_accounts </a>
-      <a (click)="onDeleteClick(user?.id)" class="material-icons"> delete_forever </a>
+      <img [src]="user.avatar" width="64" height="64" alt="avatar" />
+      <span>{{ user.first_name }}</span>
+      <span>{{ user.last_name }}</span>
+      <span>{{ user.email }}</span>
+      <a (click)="onDetailClick(user?.id)" class="material-icons">
+        manage_accounts
+      </a>
+      <a (click)="onDeleteClick(user?.id)" class="material-icons">
+        delete_forever
+      </a>
     </section>
   }
   <section class="action">
-    <a (click)="addRadomUserClick()"
-       class="material-icons"
-       title="Add random User">person_add</a>
+    <a
+      (click)="addRadomUserClick()"
+      class="material-icons"
+      title="Add random User"
+      >person_add</a
+    >
   </section>
 </div>
-<hr>
-<div class="pager" *ngIf="(pagerCount$ | async) as pc" >
-  <a (click)="onPagingClick()"
-     class="material-icons"
-     [ngClass]="{'disabled': pc.current === 2 }"
-     title="Load page 2 of 2">
+<hr />
+<div class="pager" *ngIf="pagerCount$ | async as pc">
+  <a
+    (click)="onPagingClick()"
+    class="material-icons"
+    [ngClass]="{ disabled: pc.current === 2 }"
+    title="Load page 2 of 2"
+  >
     arrow_downward
   </a>
   <div>

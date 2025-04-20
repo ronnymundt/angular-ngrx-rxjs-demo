@@ -23,7 +23,7 @@
   align-items: center;
   justify-items: center;
 
-  >div {
+  > div {
     display: grid;
     grid-template-columns: repeat(2, min-content);
     column-gap: 1rem;
