@@ -12,9 +12,9 @@ Die App zeigt eine Benutzertabelle, es können neue (zufällige) Benutzer angele
 
 ## ✨ Features
 
-- Benutzerliste mit Live-Updates (RxJS Timer)
-- Automatisches Hinzufügen zufälliger Benutzer
-- Auswahl eines Benutzers zur Detailanzeige
+- Benutzerliste
+- Hinzufügen zufälliger Benutzer
+- Benutzers Detailanzeige
 - State-Management mit NgRx Store & Entity
 
 ## ▶️ Lokales Setup
