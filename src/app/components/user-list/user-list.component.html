@@ -1,13 +1,15 @@
 <hr>
 <div class="user-list">
-  <section *ngFor="let user of userList$ | async">
-    <img [src]="user.avatar" width="64" height="64" alt="avatar">
-    <span>{{user.first_name}}</span>
-    <span>{{user.last_name}}</span>
-    <span>{{user.email}}</span>
-    <a (click)="onDetailClick(user?.id)" class="material-icons"> manage_accounts </a>
-    <a (click)="onDeleteClick(user?.id)" class="material-icons"> delete_forever </a>
-  </section>
+  @for(user of userList$ | async; track user.id) {
+    <section>
+      <img [src]="user.avatar" width="64" height="64" alt="avatar">
+      <span>{{user.first_name}}</span>
+      <span>{{user.last_name}}</span>
+      <span>{{user.email}}</span>
+      <a (click)="onDetailClick(user?.id)" class="material-icons"> manage_accounts </a>
+      <a (click)="onDeleteClick(user?.id)" class="material-icons"> delete_forever </a>
+    </section>
+  }
   <section class="action">
     <a (click)="addRadomUserClick()"
        class="material-icons"

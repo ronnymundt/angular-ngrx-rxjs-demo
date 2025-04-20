@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NgFor, NgIf, AsyncPipe, NgClass} from '@angular/common';
+import {NgIf, AsyncPipe, NgClass} from '@angular/common';
 import {Router} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {
@@ -15,7 +15,6 @@ import {
     styleUrls: ['./user-list.component.scss'],
     standalone: true,
   imports: [
-    NgFor,
     NgIf,
     AsyncPipe,
     NgClass

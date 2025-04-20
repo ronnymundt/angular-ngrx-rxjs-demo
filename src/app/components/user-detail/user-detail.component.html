@@ -1,13 +1,16 @@
-<article *ngIf="user">
-  <img [src]="user.avatar" alt="avatar">
-  <div>
-    <span>ID</span><span>{{user.id}}</span>
-    <span>First name</span><span>{{user.first_name}}</span>
-    <span>Last name</span><span>{{user.last_name}}</span>
-    <span>Email</span><span>{{user.email}}</span>
-  </div>
-</article>
-<a (click)="history.back()">
-  <span class="material-icons">arrow_back</span>
-  <span>Back</span>
-</a>
+@if(user) {
+  <article>
+    <img [src]="user.avatar" alt="avatar">
+    <div>
+      <span>ID</span><span>{{ user.id }}</span>
+      <span>First name</span><span>{{ user.first_name }}</span>
+      <span>Last name</span><span>{{ user.last_name }}</span>
+      <span>Email</span><span>{{ user.email }}</span>
+    </div>
+  </article>
+  <a (click)="history.back()">
+    <span class="material-icons">arrow_back</span>
+    <span>Back</span>
+  </a>
+}
+

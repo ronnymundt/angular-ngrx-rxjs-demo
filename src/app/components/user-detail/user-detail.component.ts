@@ -1,4 +1,3 @@
-import {NgForOf, NgIf} from "@angular/common";
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Store} from "@ngrx/store";
@@ -8,10 +7,7 @@ import {IUser, IUserListState, selectUserListUserById} from "../../+state/user-l
 @Component({
   selector: 'user-detail',
   standalone: true,
-  imports: [
-    NgForOf,
-    NgIf
-  ],
+  imports: [],
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.scss'
 })
