@@ -1,11 +1,31 @@
-# Angular Ngrx (+Entity) and Rxjs Demo
+# Angular NgRx (+Entity) und RxJS Demo 👥
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.
+Eine kleine Angular 19 Demo-App mit NgRx Store (inkl. Entity) und RxJS. 
+Die App zeigt eine Benutzertabelle, es können neue (zufällige) Benutzer angelegt, ein Benutzer gelöscht oder die Details anzeigen werden.
 
-## Development server
+## 🛠️ Technologien
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Angular 19
+- NgRx Store + Entity
+- RxJS
+- TypeScript
 
-## Screenshot
+## ✨ Features
+
+- Benutzerliste mit Live-Updates (RxJS Timer)
+- Automatisches Hinzufügen zufälliger Benutzer
+- Auswahl eines Benutzers zur Detailanzeige
+- State-Management mit NgRx Store & Entity
+
+## ▶️ Lokales Setup
+
+```
+git clone https://github.com/ronnymundt/angular-ngrx-rxjs-demo.git
+cd angular-ngrx-rxjs-demo
+npm install
+ng serve
+```
+
+## 📸 Screenshot
 
 ![Screenshot](/src/assets/screenshot.png)
