@@ -3,18 +3,16 @@ import { provideRouter } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { UserListEffects, userListReducer } from './app/+state/user-list';
 import { AppComponent } from './app/app.component';
-import {
-  withInterceptorsFromDi,
-  provideHttpClient,
-} from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideStore } from '@ngrx/store';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { RouterPaths } from './app/configs';
+import { httpReqresApiKeyInterceptor } from './app/interceptors';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withInterceptors([httpReqresApiKeyInterceptor])),
     provideRouter(RouterPaths),
     provideStore({
       userListState: userListReducer,
