@@ -7,8 +7,8 @@ export const userListFeatureKey = 'userListState';
 export const userListAdapter = createEntityAdapter<IUser>();
 export const userListInitialState: IUserListState =
   userListAdapter.getInitialState({
-    ids: [],
-    entities: {},
+    //ids: [],
+    //entities: {},
     page: 0,
     per_page: 0,
     total: 0,
